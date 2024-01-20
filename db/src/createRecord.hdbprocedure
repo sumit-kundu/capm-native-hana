@@ -1,0 +1,27 @@
+PROCEDURE "createRecord"( out results "APP_INTERACTIONS_INTERACTIONS_HEADER")
+   LANGUAGE SQLSCRIPT
+   SQL SECURITY INVOKER
+   --DEFAULT SCHEMA <default_schema_name>
+AS
+BEGIN
+   /*************************************
+       Write your procedure logic
+   *************************************/
+   DECLARE vID INTEGER;
+   declare vPartner NVARCHAR(10);
+   DECLARE vLogDate SECONDDATE;
+   DECLARE vCountry NVARCHAR(3);
+
+   -- vID = "InteractionId".nextval;
+   vPartner = '100000006';
+   vLogDate = '2024-01-01'; 
+   vCountry = 'IN';
+
+   SELECT "InteractionId".nextval into vID FROM "DUMMY";
+
+   INSERT INTO "APP_INTERACTIONS_INTERACTIONS_HEADER" 
+     ("ID", "PARTNER", "LOG_DATE", "BPCOUNTRY_CODE"  )
+     VALUES (vID, vPartner, vLogDate, vCountry);
+
+   results = SELECT * from  "APP_INTERACTIONS_INTERACTIONS_HEADER" where ID = :vID; 
+END

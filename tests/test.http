@@ -1,0 +1,5 @@
+POST http://localhost:5000/odata/v4/catalog/addInteraction HTTP/1.1
+content-type: application/json
+
+{}
+
